@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "status": "failing",
+  "purpose": "controlled GitHub Pages rollback canary",
+  "rollbackTarget": "4453d58744ec9cbec83e456d3643177eb351555d",
+  "expiresAfterUse": true
+}
