@@ -14,13 +14,26 @@ const checks = [
   ["semantic navigation", /<nav[\s>]/u],
 ];
 
-const failures = checks.filter(([, pattern]) => !pattern.test(html)).map(([name]) => name);
-if (/location\.replace\s*\(/u.test(html)) failures.push("front door still redirects");
-if (/<(?:script|link)[^>]+(?:src|href)=["']https?:/iu.test(html)) failures.push("external runtime dependency");
+const results = checks.map(([name, pattern]) => ({ name, passed: pattern.test(html) }));
+results.push({ name: "front door still redirects", passed: !/location\.replace\s*\(/u.test(html) });
+results.push({
+  name: "external runtime dependency",
+  passed: !/<(?:script|link)[^>]+(?:src|href)=["']https?:/iu.test(html),
+});
 
-if (failures.length > 0) {
-  console.error(JSON.stringify({ ok: false, failures }));
+const failed = results.find((result) => !result.passed);
+const passed = results.filter((result) => result.passed).length;
+if (failed !== undefined) {
+  console.log(JSON.stringify({
+    schemaVersion: 1,
+    passed,
+    total: results.length,
+    failure: {
+      assertionId: failed.name.replaceAll(" ", "-"),
+      message: `Release-context acceptance check failed: ${failed.name}`,
+    },
+  }));
   process.exit(1);
 }
 
-console.log(JSON.stringify({ ok: true, passed: checks.length + 2, total: checks.length + 2 }));
+console.log(JSON.stringify({ schemaVersion: 1, passed, total: results.length, failure: null }));
