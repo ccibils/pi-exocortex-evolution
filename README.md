@@ -9,4 +9,4 @@ Public, credential-free release story for the bounded external Pi upstream route
 - Search candidate gate: passed
 - R1 release gate: not earned
 
-The browser-facing story and receipt are content-addressed. The service worker pre-caches both and removes superseded cache generations on activation.
+The browser-facing story and receipt are content-addressed. The service worker pre-caches both and removes superseded cache generations on activation. The current story also exposes the honest R1 external-delivery frontier: one observed rollback episode, zero of three countable representative code deliveries, live rollback proven, and Cristian attention still unmeasured.
