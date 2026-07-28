@@ -1,7 +1,7 @@
-const CACHE = "pi-exocortex-evolution-29b981ff67adc60e2d12391d7a8368c41facf0bc11ba671e62780dfea94cdc3c";
+const CACHE = "pi-exocortex-evolution-88f39a9ad6ae514c1272f5e7d7a3e0c536464b35987c28e3ea4991a5e51b6011";
 const PRECACHE = [
-  "./story-29b981ff67adc60e2d12391d7a8368c41facf0bc11ba671e62780dfea94cdc3c.html",
-  "./receipt-f8133db767c84094510fd5c3cd1a8da05c73dc327d9bf34b6891d8742cb388c9.json",
+  "./story-88f39a9ad6ae514c1272f5e7d7a3e0c536464b35987c28e3ea4991a5e51b6011.html",
+  "./receipt-2adb2e386a3fb2002ec094463154b1d58474aab971cb27375192efb26bd27ba4.json",
   "./favicon.ico",
 ];
 
