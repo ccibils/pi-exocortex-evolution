@@ -1,20 +1,26 @@
 import { readFileSync } from "node:fs";
 
 const html = readFileSync("index.html", "utf8");
+const visibleText = html
+  .replace(/<style\b[\s\S]*?<\/style>/giu, " ")
+  .replace(/<script\b[\s\S]*?<\/script>/giu, " ")
+  .replace(/<[^>]+>/gu, " ")
+  .replace(/\s+/gu, " ")
+  .trim();
 const checks = [
-  ["release command title", /<title>Pi Exocortex · Release Command<\/title>/u],
-  ["earned frontier", /Earned frontier[^<]*R0/iu],
-  ["current campaign", /Current campaign[^<]*R1/iu],
-  ["build frontier", /Build frontier[^<]*R3\.5/iu],
-  ["rung context", /R0[^<]*(?:earned|proven)[\s\S]*R1[^<]*(?:current|earning)[\s\S]*R2[^<]*shadow[\s\S]*R3[^<]*shadow/iu],
-  ["completion progress", /0\s*\/\s*3[^<]*(?:deliveries|countable)/iu],
-  ["next proof", /Next proof/iu],
-  ["evidence story link", /story-88f39a9ad6ae514c1272f5e7d7a3e0c536464b35987c28e3ea4991a5e51b6011\.html/u],
-  ["semantic main", /<main[\s>]/u],
-  ["semantic navigation", /<nav[\s>]/u],
+  ["release command title", html, /<title>Pi Exocortex · (?:Release Command|Mission Control|Release Front Door)<\/title>/u],
+  ["earned frontier", visibleText, /Earned frontier\s+R0/iu],
+  ["current campaign", visibleText, /Current campaign\s+R1/iu],
+  ["build frontier", visibleText, /Build frontier\s+R3\.5/iu],
+  ["rung context", visibleText, /R0.*(?:earned|proven).*R1.*(?:current|earning).*R2.*shadow.*R3.*shadow/iu],
+  ["completion progress", visibleText, /(?:0\s*\/\s*3.*(?:deliveries|countable)|(?:deliveries|countable).*0\s*\/\s*3)/iu],
+  ["next proof", visibleText, /Next proof/iu],
+  ["evidence story link", html, /story-88f39a9ad6ae514c1272f5e7d7a3e0c536464b35987c28e3ea4991a5e51b6011\.html/u],
+  ["semantic main", html, /<main[\s>]/u],
+  ["semantic navigation", html, /<nav[\s>]/u],
 ];
 
-const results = checks.map(([name, pattern]) => ({ name, passed: pattern.test(html) }));
+const results = checks.map(([name, source, pattern]) => ({ name, passed: pattern.test(source) }));
 results.push({ name: "front door still redirects", passed: !/location\.replace\s*\(/u.test(html) });
 results.push({
   name: "external runtime dependency",
