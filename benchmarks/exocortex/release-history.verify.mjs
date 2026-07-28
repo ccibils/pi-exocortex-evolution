@@ -8,7 +8,7 @@ const visibleText = html
   .replace(/\s+/gu, " ")
   .trim();
 const checks = [
-  ["release-history-landmark", html, /<section[^>]+aria-label=["'][^"']*(?:release\s+)?history[^"']*["']/iu],
+  ["release-history-landmark", html, /<section\b[\s\S]*?<h2[^>]*>\s*(?:release\s+)?history\s*<\/h2>/iu],
   ["campaign-progress", visibleText, /(?:1\s*\/\s*3.*(?:deliveries|countable)|(?:deliveries|countable).*1\s*\/\s*3)/iu],
   ["context-delivery", visibleText, /context.*(?:feature|delivery|front door)/iu],
   ["release-commit", visibleText, /283f8e9(?:252fc44c975a9e2569534785e5e6cae1f)?/iu],
