@@ -153,6 +153,47 @@
       color:var(--muted);
       font-size:.92rem;
     }
+    .history{
+      display:grid;
+      gap:1rem;
+      margin-top:1.5rem;
+    }
+    .history-item{
+      display:grid;
+      gap:.9rem;
+    }
+    .history-head{
+      display:flex;
+      justify-content:space-between;
+      gap:1rem;
+      align-items:flex-start;
+      flex-wrap:wrap;
+    }
+    .history-title{
+      font-size:1.1rem;
+      font-weight:700;
+    }
+    .history-meta{
+      display:grid;
+      gap:.75rem;
+      font-size:.92rem;
+    }
+    .meta-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:.75rem;
+    }
+    .meta{
+      padding:.85rem;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:#0e130f;
+    }
+    code{
+      font:inherit;
+      word-break:break-all;
+      color:var(--accent-2);
+    }
     @media (max-width:640px){
       .wrap{width:min(100% - 1rem,1040px);padding:1rem 0 2rem}
       .rung{align-items:flex-start;flex-direction:column}
@@ -188,8 +229,8 @@
       </article>
       <article class="card">
         <div class="label">Countable deliveries</div>
-        <p class="value">0 / 3</p>
-        <p class="sub">Completion signal for the R1 campaign.</p>
+        <p class="value">1 / 3</p>
+        <p class="sub">First delivery verified; two more evidence-counted outputs complete the R1 campaign.</p>
       </article>
     </section>
 
@@ -232,13 +273,42 @@
     <section class="grid" aria-label="Campaign proof">
       <article class="card">
         <div class="label">Next proof</div>
-        <p class="value">Deliver 3 evidence-counted outputs</p>
-        <p class="sub">R1 earns its rung when the delivery counter moves from 0 / 3 to 3 / 3 with inspectable evidence.</p>
+        <p class="value">Deliver 2 more evidence-counted outputs</p>
+        <p class="sub">R1 earns its rung when the delivery counter moves from 1 / 3 to 3 / 3 with inspectable evidence.</p>
       </article>
       <article class="card">
         <div class="label">Evidence access</div>
         <p class="value">Content-addressed story</p>
         <p class="sub">Open the immutable evidence trail directly.</p>
+      </article>
+    </section>
+
+    <section class="card" aria-labelledby="release-history-title">
+      <h2 id="release-history-title">Release history</h2>
+      <div class="history" aria-label="Evidence-bound release history">
+        <article class="history-item">
+          <div class="history-head">
+            <div>
+              <p class="label">Delivery 1 of 3</p>
+              <p class="history-title">Context front-door feature earned as the first countable R1 delivery.</p>
+            </div>
+            <span class="state" style="color:var(--earned)">Verified</span>
+          </div>
+          <p class="sub">Mission Control now has a board-grade front door: what was earned, what just changed, the measured delta, and what the next delivery unlocks.</p>
+          <div class="history-meta">
+            <div class="meta-grid" aria-label="Delivery evidence">
+              <div class="meta"><div class="label">Commit</div><code>283f8e9252fc44c975a9e2569534785e5e6cae1f</code></div>
+              <div class="meta"><div class="label">GitHub Pages build</div><p><a href="https://github.com/ccibils/pi-exocortex-evolution/actions/runs/30338495883">1118900944</a></p></div>
+              <div class="meta"><div class="label">Workflow</div><p><a href="https://github.com/ccibils/pi-exocortex-evolution/actions/runs/30338495883">30338495883</a></p></div>
+              <div class="meta"><div class="label">Episode receipt</div><code>031ba77beca89bf768926f2901644ba296165a96ed7e82b184c359ac24c50124</code></div>
+              <div class="meta"><div class="label">Verified quality</div><p>+0.1667</p></div>
+              <div class="meta"><div class="label">Generation cost</div><p>$0.096212</p></div>
+              <div class="meta"><div class="label">Generation time</div><p>92.804 seconds</p></div>
+              <div class="meta"><div class="label">Attention improvement</div><p>1 minute</p></div>
+            </div>
+            <p class="sub">Measured delta: campaign advanced from 0 / 3 to 1 / 3 countable deliveries while preserving the R0/R1/R2/R3 ladder, Next proof, content-addressed story link, service worker, responsive semantics, and zero external runtime dependencies.</p>
+          </div>
+        </article>
       </article>
     </section>
 
