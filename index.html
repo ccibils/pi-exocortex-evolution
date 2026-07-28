@@ -4,17 +4,263 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow,noarchive">
-  <title>Pi Exocortex · Delivery Observatory</title>
+  <title>Pi Exocortex · Mission Control</title>
   <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA2NCA2NCc+PHJlY3Qgd2lkdGg9JzY0JyBoZWlnaHQ9JzY0JyByeD0nMTQnIGZpbGw9JyMwYTBkMGInLz48cGF0aCBkPSdNMTQgNDQgMjggMTVoOUwyNSAzOGgyNXY2eicgZmlsbD0nI2E4ZmY0ZicvPjwvc3ZnPg==">
+  <style>
+    :root{
+      --bg:#0a0d0b;
+      --panel:#111612;
+      --panel-2:#171d18;
+      --text:#e8f1ea;
+      --muted:#9daaa0;
+      --line:#2a332d;
+      --accent:#a8ff4f;
+      --accent-2:#6dd3ff;
+      --shadow:#070907;
+      --earned:#b9ff7f;
+      --current:#6dd3ff;
+      --shadowed:#58635b;
+    }
+    *{box-sizing:border-box}
+    html{color-scheme:dark}
+    body{
+      margin:0;
+      font:16px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(109,211,255,.08), transparent 36%),
+        radial-gradient(circle at right top, rgba(168,255,79,.07), transparent 28%),
+        var(--bg);
+      color:var(--text);
+    }
+    a{color:var(--accent);text-underline-offset:.18em}
+    a:hover{color:#d4ffab}
+    .wrap{
+      width:min(1040px,100% - 2rem);
+      margin:0 auto;
+      padding:2rem 0 3rem;
+    }
+    header,main,section,nav{display:block}
+    .hero{
+      display:grid;
+      gap:1.25rem;
+      align-items:start;
+      margin-bottom:1.5rem;
+    }
+    .eyebrow{
+      color:var(--accent-2);
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      font-size:.8rem;
+      margin:0 0 .5rem;
+    }
+    h1,h2,p{margin:0}
+    h1{
+      font-size:clamp(2rem,4vw,3.4rem);
+      line-height:1.02;
+      letter-spacing:-.03em;
+    }
+    .lede{
+      max-width:68ch;
+      color:var(--muted);
+      font-size:1.02rem;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:1rem;
+      margin:1.5rem 0;
+    }
+    .card{
+      background:linear-gradient(180deg,var(--panel),var(--panel-2));
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:1rem;
+      box-shadow:0 10px 30px rgba(0,0,0,.18);
+    }
+    .label{
+      color:var(--muted);
+      font-size:.78rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      margin-bottom:.35rem;
+    }
+    .value{
+      font-size:1.65rem;
+      font-weight:700;
+      line-height:1.1;
+    }
+    .sub{
+      margin-top:.45rem;
+      color:var(--muted);
+    }
+    .ladder{
+      list-style:none;
+      padding:0;
+      margin:0;
+      display:grid;
+      gap:.7rem;
+    }
+    .rung{
+      display:flex;
+      justify-content:space-between;
+      gap:1rem;
+      align-items:center;
+      padding:.9rem 1rem;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:#0e130f;
+    }
+    .rung strong{font-size:1rem}
+    .rung small{display:block;color:var(--muted)}
+    .state{
+      white-space:nowrap;
+      font-size:.85rem;
+      font-weight:700;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+    .earned .state{color:var(--earned)}
+    .current .state{color:var(--current)}
+    .shadow .state{color:var(--shadowed)}
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.75rem;
+      margin-top:1.25rem;
+    }
+    .button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:2.9rem;
+      padding:.75rem 1rem;
+      border-radius:999px;
+      border:1px solid var(--line);
+      text-decoration:none;
+      font-weight:700;
+    }
+    .button.primary{
+      background:var(--accent);
+      color:#081004;
+      border-color:transparent;
+    }
+    .button.secondary{
+      color:var(--text);
+      background:transparent;
+    }
+    .status{
+      margin-top:.75rem;
+      color:var(--muted);
+      font-size:.92rem;
+    }
+    @media (max-width:640px){
+      .wrap{width:min(100% - 1rem,1040px);padding:1rem 0 2rem}
+      .rung{align-items:flex-start;flex-direction:column}
+      .state{white-space:normal}
+    }
+  </style>
 </head>
 <body>
-  <a href="./story-88f39a9ad6ae514c1272f5e7d7a3e0c536464b35987c28e3ea4991a5e51b6011.html">Open the evidence-bound evolution story</a>
+  <main class="wrap">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Mission Control</p>
+        <h1>Pi Exocortex</h1>
+      </div>
+      <p class="lede">Exocortex is a delivery observatory for evidence-bound progress: a front door that tells visitors what exists, where the release ladder stands now, and what proof earns the next rung.</p>
+    </header>
+
+    <section class="grid" aria-label="Release summary">
+      <article class="card">
+        <div class="label">Build frontier</div>
+        <p class="value">R3.5</p>
+        <p class="sub">The designed edge of the current build horizon.</p>
+      </article>
+      <article class="card">
+        <div class="label">Earned frontier</div>
+        <p class="value">R0</p>
+        <p class="sub">Latest rung backed by countable delivery evidence.</p>
+      </article>
+      <article class="card">
+        <div class="label">Current campaign</div>
+        <p class="value">R1</p>
+        <p class="sub">Active push toward the next earned release rung.</p>
+      </article>
+      <article class="card">
+        <div class="label">Countable deliveries</div>
+        <p class="value">0 / 3</p>
+        <p class="sub">Completion signal for the R1 campaign.</p>
+      </article>
+    </section>
+
+    <section class="card" aria-labelledby="release-ladder-title">
+      <h2 id="release-ladder-title">Release ladder</h2>
+      <nav aria-label="Release ladder progress">
+        <ol class="ladder">
+          <li class="rung earned">
+            <div>
+              <strong>R0</strong>
+              <small>Foundation rung established and earned.</small>
+            </div>
+            <span class="state">Earned</span>
+          </li>
+          <li class="rung current">
+            <div>
+              <strong>R1</strong>
+              <small>Current campaign: prove the first three countable deliveries.</small>
+            </div>
+            <span class="state">Current</span>
+          </li>
+          <li class="rung shadow">
+            <div>
+              <strong>R2</strong>
+              <small>Waiting in shadow until R1 proof closes.</small>
+            </div>
+            <span class="state">Shadow</span>
+          </li>
+          <li class="rung shadow">
+            <div>
+              <strong>R3</strong>
+              <small>Shadow frontier beyond the next campaign.</small>
+            </div>
+            <span class="state">Shadow</span>
+          </li>
+        </ol>
+      </nav>
+    </section>
+
+    <section class="grid" aria-label="Campaign proof">
+      <article class="card">
+        <div class="label">Next proof</div>
+        <p class="value">Deliver 3 evidence-counted outputs</p>
+        <p class="sub">R1 earns its rung when the delivery counter moves from 0 / 3 to 3 / 3 with inspectable evidence.</p>
+      </article>
+      <article class="card">
+        <div class="label">Evidence access</div>
+        <p class="value">Content-addressed story</p>
+        <p class="sub">Open the immutable evidence trail directly.</p>
+      </article>
+    </section>
+
+    <div class="actions">
+      <a class="button primary" href="./story-88f39a9ad6ae514c1272f5e7d7a3e0c536464b35987c28e3ea4991a5e51b6011.html">Open the evidence-bound evolution story</a>
+      <a class="button secondary" href="./sw.js">Inspect service worker</a>
+    </div>
+
+    <p class="status" id="sw-status" aria-live="polite">Offline support is initializing.</p>
+  </main>
   <script>
-    const story = "./story-88f39a9ad6ae514c1272f5e7d7a3e0c536464b35987c28e3ea4991a5e51b6011.html";
+    const status = document.getElementById("sw-status");
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("./sw.js").finally(() => location.replace(story));
+      navigator.serviceWorker.register("./sw.js")
+        .then(() => {
+          status.textContent = "Offline support ready.";
+        })
+        .catch(() => {
+          status.textContent = "Offline support unavailable in this session.";
+        });
     } else {
-      location.replace(story);
+      status.textContent = "Offline support is not available in this browser.";
     }
   </script>
 </body>
