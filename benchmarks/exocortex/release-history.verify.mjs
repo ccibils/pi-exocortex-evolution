@@ -18,7 +18,7 @@ const checks = [
   ["quality-gain", visibleText, /\+0\.1667/iu],
   ["generation-cost", visibleText, /\$0\.096212/u],
   ["generation-speed", visibleText, /92\.8(?:04)?\s*(?:s|seconds)/iu],
-  ["attention-improvement", visibleText, /1\s*(?:min|minute).*attention/iu],
+  ["attention-improvement", visibleText, /(?:1\s*(?:min|minute).*attention|attention.*1\s*(?:min|minute))/iu],
   ["evidence-story-link", html, /story-88f39a9ad6ae514c1272f5e7d7a3e0c536464b35987c28e3ea4991a5e51b6011\.html/u],
   ["semantic-main", html, /<main[\s>]/u],
   ["semantic-navigation", html, /<nav[\s>]/u],
